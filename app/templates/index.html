@@ -1,0 +1,61 @@
+<center>
+
+<body style="background-color:#F8C8DC">
+
+<h1> Lista zelja</h1>
+
+<b> Kreirajte vasu listu zelja</b>
+
+<form action="/save" method="POST">
+	
+	<label for="username">Korisnicko ime</label>
+	<input name="username" id="username" required><br><br>
+
+	<label for="mesto">Omiljeno mesto</label>
+	<input name="mesto" id="mesto" required><br><br>
+
+	<label for="hrana">Omiljena hrana</label>
+	<input name="hrana" id="hrana" required><br><br>
+
+	<input type="submit" value="Sacuvaj">
+
+</form>
+
+<b>Unesite korisnicko ime i popunite listu zelja </b>
+<form action="/get" method="POST">
+	<label for="username">Korisnicko ime</label>
+	<input name="username" id="username" required><br><br>
+	<input type="submit" value="Prikazi">
+</form>
+
+{% if get %}
+<font color="blue">Lista zelja za <b>{{username}}</b> je <b>{{mesto}}</b> i <b>{{hrana}}</b></font>
+<small>{{msg}}</small>
+{% endif %}
+
+{% if no_record %}
+<font color="red">{{msg}}</font>
+{% endif %}
+
+{% if user_exists %}
+<font color="red">Korisnik <b>{{username}}</b> vec postoji sa zeljama <b>{{mesto}}</b> i <b>{{hrana}}</b></font>
+<small>{{msg}}</small>
+{% endif %}
+
+{% if saved %}
+<font color="green"> Uspesno sacuvani podaci za <b>{{username}}</b> sa listom zelja <b>{{mesto}}</b> i <b>{{hrana}}</b>!!!</font>
+{% endif %}
+
+</center>
+<br>
+<a href="/keys">Kljuc</a>
+{% if keys %}
+	<h3> Kljuc </h3>
+	<small>(Iz baze)</small>
+	<ul>
+	{% for username in usernames %}
+		<li>{{username}}</li>
+	{% endfor %}
+	</ul>
+{% endif %}
+</body>
